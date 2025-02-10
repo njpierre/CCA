@@ -1,0 +1,6 @@
+
+sqlalchemy
+requests
+flask
+psycopg2
+pandas

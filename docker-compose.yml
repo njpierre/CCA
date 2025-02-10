@@ -1,0 +1,33 @@
+
+version: '3.8'
+services:
+  db:
+    build: ./services/db
+    restart: always
+    image : postgres:lastest
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: analytics_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./services/db:/docker-entrypoint-initdb.d
+
+  etl:
+    build: ./services/etl
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://user:password@cca-db-1:5432/analytics_db
+    volumes:
+      - ./data.csv:/app/data.csv    
+
+  analytics:
+    build: ./services/analytics
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://user:password@db:5432/analytics_db
+    ports:
+      - "5000:5000"
