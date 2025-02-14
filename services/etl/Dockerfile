@@ -3,6 +3,5 @@ FROM python:3.9
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-COPY data.csv /app/data.csv
 COPY etl.py .
 CMD ["python", "etl.py"]

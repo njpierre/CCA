@@ -1,4 +1,7 @@
 
+sqlalchemy
+dash
+plotly
 flask
 psycopg2
 pandas
