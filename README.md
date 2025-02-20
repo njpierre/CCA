@@ -14,13 +14,13 @@ Ces données sont fictives et ne servent qu'à montrer comment mettre en place u
 
 1. **Cloner le projet**
    
-   git clone https://github.com/njpierre/CCA
+   `git clone https://github.com/njpierre/CCA`
    
-   cd CCA
+   `cd CCA`
 
 3. **Lancer Docker Compose**
    
-   docker-compose up --build
+   `docker-compose up --build`
    
 
 ###  **Accès à l'application**
@@ -66,18 +66,18 @@ Ces données sont fictives et ne servent qu'à montrer comment mettre en place u
  
 ### **Vérifier si les conteneurs tournent**
  
-docker ps -a
+`docker ps -a`
  
 ###  **Voir les logs des services**
  
-docker logs -f cca-analytics-1  # Logs du service Analytics
+`docker logs -f cca-analytics-1  # Logs du service Analytics`
  
 ###  **Se connecter à PostgreSQL**
  
-docker exec -it cca-db-1 psql -U user -d analytics_db
+`docker exec -it cca-db-1 psql -U user -d analytics_db`
  
 ###  **Supprimer et reconstruire les volumes (si problème de données)**
  
-docker compose down -v
+`docker compose down -v`
  
-docker compose up --build
+`docker compose up --build`
