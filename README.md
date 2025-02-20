@@ -14,9 +14,9 @@ Ces données sont fictives et ne servent qu'à montrer comment mettre en place u
 
 1. **Cloner le projet**
    
-   git clone "repo-url"
+   git clone https://github.com/njpierre/CCA
    
-   cd <nom_du_dossier>
+   cd CCA
 
 3. **Lancer Docker Compose**
    
