@@ -1,4 +1,3 @@
-
 CREATE TABLE IF NOT EXISTS data (
     id SERIAL PRIMARY KEY,
     "Date" DATE,

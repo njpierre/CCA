@@ -1,4 +1,4 @@
-
+dash-bootstrap-components
 sqlalchemy
 dash
 plotly

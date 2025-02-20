@@ -1,95 +1,95 @@
 
-# Projet Cloud Computing - Pipeline d'Analyse de Données
-```
-# 📌 Projet CCA - Flask & Dash avec PostgreSQL
+# Projet Cloud Computing : Dashboard des ventes d'une entreprise
 
 Ce projet est une application d'analyse de données utilisant **Flask** pour les API et **Dash** pour l'affichage des graphiques interactifs. Les données sont stockées dans une base de données **PostgreSQL**, et un pipeline ETL permet de les charger automatiquement.
+Ces données sont fictives et ne servent qu'à montrer comment mettre en place une application dans un docker.
 
----
+## Installation & Exécution
 
-## 🚀 Installation & Exécution
+###  **Prérequis**
+- **Docker** installé sur votre ordinateur
+- **Docker Compose** pour gérer les services
 
-### 🔧 **Prérequis**
-- `Docker` installé sur votre machine
-- `Docker Compose` pour gérer les services
-
-### 📦 **Démarrer l'application**
+### **Coment Démarrer l'application**
 
 1. **Cloner le projet**
    ```sh
-   git clone <repo-url>
-   cd <nom_du_dossier>
+   git clone https://github.com/njpierre/CCA
+   
+   cd CCA
    ```
-2. **Lancer Docker Compose**
+3. **Lancer Docker Compose**
    ```sh
-   docker-compose up --build
+   docker compose up --build
    ```
+   
 
-📌 **Attends quelques secondes** que tous les services démarrent.
+###  **Accès à l'application**
 
-### 🖥 **Accès à l'application**
+ **Copier l'URL :**  `http://localhost:5000/dash/` 
 
-| Fonctionnalité | URL |
-|--------------|----|
-| **Dashboard Dash (graphiques)** | `[http://localhost:5000/dash/]` |
-| **API Flask - Récupérer les données** | `[http://localhost:5000/data]` |
-| **API Flask - Statistiques générales** | `[http://localhost:5000/stats]` |
-| **API Flask - Statistiques par colonne** | ``http://localhost:5000/stats/<nom_colonne>`` |
-| **Liste des colonnes de la table** | `[http://localhost:5000/columns]` |
 
----
+##  **Architecture des Services**
 
-## 🛠 **Architecture des Services**
+### **Services Déployés**
 
-### 📌 **Services Déployés**
+1. **PostgreSQL (db)** : Stocke les données.
+2. **ETL (etl)** : Charge "data.csv" dans PostgreSQL.
+3. **Analytics (analytics)** : Fournit les API Flask & le Dashboard Dash.
 
-1. **PostgreSQL (`db`)** 📊 - Stocke les données.
-2. **ETL (`etl`)** 🔄 - Charge `data.csv` dans PostgreSQL.
-3. **Analytics (`analytics`)** 📈 - Fournit les API Flask & le Dashboard Dash.
+### **Structure du projet**
 
-### 📂 **Structure du projet**
 
+ ```
+CCA/
+│── docker-compose.yml       # Configuration Docker
+│
+├── services/
+│   ├── db/                  # Service de base de données
+│   │   ├── data.csv         # Données brutes
+│   │   ├── database.db      # Base de données SQLite
+│   │   ├── Dockerfile       # Image Docker pour la base de données
+│   │   ├── init.sql         # Script d'initialisation de la DB
+│   │
+│   ├── etl/                 # Service ETL pour transformation des données
+│   │   ├── etl.py           # Script ETL principal
+│   │   ├── requirements.txt # Dépendances pour l'ETL
+│   │   ├── Dockerfile       # Image Docker pour l'ETL
+│   │
+│   ├── analytics/           # Service Analytics pour le dashboard
+│   │   ├── app.py           # Point d'entrée principal
+│   │   ├── database.py      # Connexion à la base de données
+│   │   ├── server.py        # Serveur Flask
+│   │   ├── layout.py        # Définition du layout Dash
+│   │   ├── callbacks.py     # Gestion des callbacks Dash
+│   │   ├── charts.py        # Génération des graphiques
+│   │   ├── requirements.txt # Dépendances pour Analytics
+│   │   ├── Dockerfile       # Image Docker pour Analytics
+│   │
+│── .git/                    # Référentiel Git
+│── README.md                 # Documentation du projet
 ```
-📁 CCA/
-│── 📄 docker-compose.yml      # Configuration des services Docker
-│── 📁 services/
-│   ├── 📁 db/                 # Service de base de données PostgreSQL
-│   │   ├── 📄 init.sql         # Script SQL pour créer la table
-│   │   ├── 📄 data.csv         # Fichier de données
-│   ├── 📁 etl/                # Pipeline ETL
-│   │   ├── 📄 etl.py           # Script pour charger les données
-│   ├── 📁 analytics/          # Service Flask & Dash
-│   │   ├── 📄 app.py          # Serveur Flask & Dash
-│   │   ├── 📄 layout.py       # Layout de l'interface Dash
-│   │   ├── 📄 callbacks.py    # Callbacks pour interactivité Dash
-```
 
----
-
-## 🔍 **Débogage & Résolution des Problèmes**
-
-### 📌 **Vérifier si les conteneurs tournent**
-
+## **Débogage & Résolution des Problèmes**
+ 
+### **Vérifier si les conteneurs tournent**
 ```sh
 docker ps -a
 ```
-
-### 📌 **Voir les logs des services**
-
+ 
+###  **Voir les logs des services**
 ```sh
 docker logs -f cca-analytics-1  # Logs du service Analytics
 ```
-
-### 📌 **Se connecter à PostgreSQL**
-
+ 
+###  **Se connecter à PostgreSQL**
 ```sh
 docker exec -it cca-db-1 psql -U user -d analytics_db
 ```
-
-### 📌 **Supprimer et reconstruire les volumes (si problème de données)**
-
-```sh
-docker compose down -v
-
+ 
+###  **Supprimer et reconstruire les volumes (si problème de données)**
+ ```sh
+docker compose down
+ 
 docker compose up --build
 ```
