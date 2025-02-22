@@ -1,7 +1,7 @@
 
 # Projet Cloud Computing : Dashboard des ventes d'une entreprise
 
-Ce projet est une application d'analyse de données utilisant **Flask** pour les API et **Dash** pour l'affichage des graphiques interactifs. Les données sont stockées dans une base de données **PostgreSQL**, et un pipeline ETL permet de les charger automatiquement.
+Ce projet est une application d'analyse de données utilisant **Flask** et **Dash** pour l'affichage des graphiques interactifs. Les données sont stockées dans une base de données **PostgreSQL**, et un pipeline ETL permet de les charger automatiquement.
 Ces données sont fictives et ne servent qu'à montrer comment mettre en place une application dans un docker.
 
 ## Installation & Exécution
